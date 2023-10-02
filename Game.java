@@ -14,21 +14,28 @@ public class Game {
     Scanner a = new Scanner(System.in);
     String command = a.nextLine();
     while(!(command == "end")) {
+      Scanner b = new Scanner(System.in);
+      command = b.nextLine();
       commands(command);
+      if (command.equals("end"))
+      {
+      //   System.out.println("The game has ended.");
+      break;
+      }
     }
   }
   
   public void playerInfo() {
     System.out.println("Enter a user name:");
-    Scanner b = new Scanner(System.in);
-    String name = b.nextLine();
-    System.out.println("Hello " + name + ". Type fish to catch some fish. Type gold to view your balance. Type end to end this game.");
+    Scanner c = new Scanner(System.in);
+    String name = c.nextLine();
+    System.out.println("Hello " + name + ". Type \"fish\" to catch some fish. Type \"gold\" to view your balance. Type \"end\" to end this game.");
     player = new Player(name);
   }
   
   public void commands(String command) {
-    // Scanner c = new Scanner(System.in);
-    // String command = c.nextLine();
+    Scanner d = new Scanner(System.in);
+    command = d.nextLine();
     int max = 10;
     int min = 1;
     int range = max - min + 1;
@@ -41,13 +48,13 @@ public class Game {
       System.out.println("You have " + player.checkGold() + " gold.");
     } else if (command.equals("end")) {
       System.out.println("The game has ended.");
-      break;
+      // break;
     } else {
       System.out.println("Please try again.");
     }
   }
   
   public void returnGold() {
-    System.out.println("You have a current balance of " + player.checkGold() + " gold.");
+    System.out.println("Total gold: " + player.checkGold());
   }
 }
