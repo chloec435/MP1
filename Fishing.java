@@ -10,7 +10,7 @@ public class Fishing {
   // }
   public void catchFish(int caught) {
     totalFish += caught;
-    System.out.println("You have caught " + caught + "fish.");
+    System.out.println("You have caught " + caught + " fish.");
   }
   public void fledAway(int fled) {
     totalFish -= fled;
