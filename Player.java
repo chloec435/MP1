@@ -14,13 +14,13 @@ public class Player {
   public void addGold(int gold) {
     playerGold += gold;
   }
-  public checkGold() {
+  public int checkGold() {
     return playerGold;
   }
   public void addFish(int fish) {
     playerFish += fish;
   }
-  public checkFish() {
+  public int checkFish() {
     return playerFish;
   }
 }
