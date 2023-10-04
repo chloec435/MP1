@@ -1,25 +1,17 @@
 import java.util.Scanner;
-import java.lang.Math;
 public class Game {
   private Fishing fishing;
   private Player player;
-  // private String fish;
-  // private String gold;
+  private CoinFlip coinflip;
   public Game() {
     fishing = new Fishing();
-    // System.out.println("Type start to start the game.");
-    // Scanner a = new Scanner(System.in);
-    // String start = a.nextLine();
     playerInfo();
-    Scanner a = new Scanner(System.in);
-    String command = a.nextLine();
+    String command = "start";
     while(!(command == "end")) {
-      Scanner b = new Scanner(System.in);
-      command = b.nextLine();
+      Scanner a = new Scanner(System.in);
+      command = a.nextLine();
       commands(command);
-      if (command.equals("end"))
-      {
-      //   System.out.println("The game has ended.");
+      if (command.equals("end")) {
       break;
       }
     }
@@ -27,34 +19,52 @@ public class Game {
   
   public void playerInfo() {
     System.out.println("Enter a user name:");
-    Scanner c = new Scanner(System.in);
-    String name = c.nextLine();
-    System.out.println("Hello " + name + ". Type \"fish\" to catch some fish. Type \"gold\" to view your balance. Type \"end\" to end this game.");
-    player = new Player(name);
+    Scanner b = new Scanner(System.in);
+    player = new Player(b.nextLine());
+    System.out.println("Hello " + player.getName() + ". \nType \"catch\" to catch some fish. \nType \"sell\" to sell fish. \nType \"fish\" to check how much fish you have. \nType \"gold\" to view your balance. \nType \"command\" to view the commands. \nType \"end\" to end this game.");
   }
   
   public void commands(String command) {
-    Scanner d = new Scanner(System.in);
-    command = d.nextLine();
-    int max = 10;
-    int min = 1;
+    int max = 100;
+    int min = 10;
     int range = max - min + 1;
-    if (command.equals("fish")) {
-      // int max = 10;
-      // int min = 9;
-      // int range = max - min + 1;
+    if (command.equals("catch")) {
       fishing.catchFish((int)(Math.random() * range) + min);
+      
+    } else if (command.equals("sell")) {
+      System.out.println("How much fish do you want to sell?");
+      try {
+        Scanner c = new Scanner(System.in);
+        int sell = c.nextInt();
+        fishing.sellFish(sell);
+      } catch (Exception inputMismatchException) {
+        System.out.println("Please enter an integer.");
+        Scanner d = new Scanner(System.in);
+        int newSell = d.nextInt();
+        fishing.sellFish(newSell);
+      }
+      
+    } else if (command.equals("fish")) {
+      System.out.println("You have a total of " + fishing.numFish() + " fish.");
+      
     } else if (command.equals("gold")) {
-      System.out.println("You have " + player.checkGold() + " gold.");
+      System.out.println("You have " + fishing.getGold() + " gold.");
+      
     } else if (command.equals("end")) {
       System.out.println("The game has ended.");
-      // break;
+      
+    } else if (command.equals("command")) {
+        System.out.println("Type \"catch\" to catch some fish. \nType \"sell\" to sell fish. \nType \"fish\" to check how much fish you have. \nType \"gold\" to view your balance. \nType \"command\" to view the commands. \nType \"end\" to end this game.");
+      
     } else {
       System.out.println("Please try again.");
     }
   }
-  
-  public void returnGold() {
-    System.out.println("Total gold: " + player.checkGold());
+
+  public void coinFlip() {
+    System.out.println("Heads or tails?");
+    Scanner e = new Scanner(System.in);
+    coinflip.flip(e.nextLine());
+    
   }
 }
