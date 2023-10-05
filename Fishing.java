@@ -1,6 +1,7 @@
 public class Fishing {
   private int totalFish;
   private int totalGold;
+  // private CoinFlip cflip;
   public void catchFish(int caught) {
     totalFish += caught;
     System.out.println("You have caught " + caught + " fish.");
@@ -17,6 +18,19 @@ public class Fishing {
       System.out.println("You have sold " + fish + " fish and received " + addGold + " gold.");
     } else {
       System.out.println("You don't have enough fish to sell.");
+    }
+  }
+  public void addGoldFromCF(int headsOrTails, int bet, int coin) {
+    // cflip = new CoinFlip();
+    if (headsOrTails == coin) {
+      int wager = bet*2;
+      totalGold += wager;
+      System.out.println("Congrats! You have guessed right!");
+      System.out.println("You have received " + wager + " gold.");
+    } else if (!(headsOrTails == coin)) {
+      totalGold -= bet;
+      System.out.println("Sorry, better luck next time!");
+      System.out.println("You have lost " + bet + " gold.");
     }
   }
   public int numFish() {
