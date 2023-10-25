@@ -1,12 +1,12 @@
-public class Player {
-  private String playerName;
-  public Player(String name) {
-    playerName = name;
-  }
-  public void setName(String name) {
-    playerName = name;
-  }
-  public String getName() {
-    return playerName;
-  }
-}
+// public class Player {
+//   private String playerName;
+//   public Player(String name) {
+//     playerName = name;
+//   }
+//   public void setName(String name) {
+//     playerName = name;
+//   }
+//   public String getName() {
+//     return playerName;
+//   }
+// }
