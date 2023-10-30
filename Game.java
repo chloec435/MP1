@@ -1,8 +1,8 @@
 import java.util.Scanner;
 public class Game {
   private Fishing fishing;
-  private Blackjack blackjack;
-  private int cfBet;
+  private Blackjack blackjack = null;
+  private Coinflip coinflip = null;
   private int bjBet;
   private Scanner scanner;
   private String command;
@@ -12,11 +12,12 @@ public class Game {
     playerInfo();
     command = "start";
     while(!command.equals("end")) {
+      System.out.println("Type a command:");
       scanner = new Scanner(System.in);
       command = scanner.nextLine();
       commands(command);
       if (command.equalsIgnoreCase("coinflip")) coinFlip();
-      if (command.equalsIgnoreCase("blackjack")) blackjack();
+      if (command.equalsIgnoreCase("blackjack")) blackJack();
       if (command.equalsIgnoreCase("end")) break;
     }
   }
@@ -29,9 +30,9 @@ public class Game {
   }
   
   public void commands(String command) {
-    int max = 100;
-    int min = 10;
-    int range = max - min + 1;
+    int max = 10;
+    int min = 1;
+    final int range = max - min + 1;
     if (command.equalsIgnoreCase("catch")) {
       fishing.catchFish((int)(Math.random() * range) + min);
     } else if (command.equalsIgnoreCase("sell")) {
@@ -66,28 +67,29 @@ public class Game {
   public void coinFlip() {
     Scanner e = new Scanner(System.in);
     int gold = e.nextInt();
-    System.out.println("Heads or tails?");
-    Scanner f = new Scanner(System.in);
-    String HorT = f.nextLine();
-    int max = 1;
-    int min = 0;
-    int coinSide = (int)(Math.random() * (max - min + 1)) + min;
-    if (HorT.equalsIgnoreCase("heads") || HorT.equalsIgnoreCase("h")) cfBet = 0;
-    else if (HorT.equalsIgnoreCase("tails") || HorT.equalsIgnoreCase("t")) cfBet = 1;
-    if (fishing.getGold() >= gold) fishing.addGoldFromCF(cfBet, gold, coinSide);
-    else System.out.println("You do not have enough gold. Type \"catch\" to catch some fish or \"sell\" to sell fish for gold!");
+    if (fishing.getGold() < gold) {
+      System.out.println("You do not have enough gold. Type \"catch\" to catch some fish or \"sell\" to sell fish for gold!");
+    } else {
+      // if (Coinflip.getWinStreak() == 0) {
+      //   coinflip = new Coinflip("start");
+      //   fishing.addGoldFromCF(coinflip.winOrLose(), gold);
+      // } else {
+        coinflip = new Coinflip(coinflip.getWinStreak()+1);
+        fishing.addGold(coinflip.winOrLose(), gold, coinflip.getWinStreak());
+      // }
+    }
   }
 
-  public void blackjack() {
+  public void blackJack() {
     Scanner g = new Scanner(System.in);
     bjBet = g.nextInt();
-    blackjack = new Blackjack();
-    if (fishing.getGold() >= bjBet) {
-      if (blackjack.getPlayerWin()) fishing.addGoldFromBJ(bjBet);
-      else if (!blackjack.getPlayerWin()) fishing.removeGoldFromBJ(bjBet);
-      else System.out.println("No gold was lost or gained.");
-    } else {
+    if (fishing.getGold() < bjBet) {
       System.out.println("You do not have enough gold. Type \"catch\" to catch some fish or \"sell\" to sell fish for gold!");
+    } else {
+    blackjack = new Blackjack();
+    if (blackjack.getPlayerWin()) fishing.addGold(bjBet);
+    else if (!blackjack.getPlayerWin()) fishing.removeGold(bjBet);
+    else System.out.println("No gold was lost or gained.");
     }
   }
 }
