@@ -5,8 +5,6 @@ public class Blackjack {
   private int dealerTotal;
   private String response;
   private boolean playerWin;
-  public Blackjack(String a) {
-  }   
   public Blackjack() {
     deal();
     ask();
