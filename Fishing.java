@@ -8,27 +8,36 @@ public class Fishing {
   public void sellFish(int fish){
     if ((fish <= totalFish) && (fish >= 0)) {
       totalFish -= fish;
-      int addGold = fish*100;
-      totalGold += addGold;
-      System.out.println("You have sold " + fish + " fish and received " + addGold + " gold.");
+      Integer addGold = new Integer(fish*100);
+      totalGold += addGold.intValue();
+      System.out.println("You have sold " + fish + " fish and received " + addGold.intValue() + " gold.");
     } else {
-      System.out.println("You don't have enough fish to sell.");
+      System.out.println("You don't have enough fish to sell. You currently have a total of " + totalFish + " fish.");
     }
   }
-  public void addGoldFromCF(int headsOrTails, int bet, int coin) {
-    if (headsOrTails == coin) {
-      totalGold += bet;
-      System.out.println("Congrats! You have guessed right! \nYou have received " + bet*2 + " gold.");
-    } else if (!(headsOrTails == coin)) {
+  // public void addGold(boolean winOrLose, int bet) {
+  //   if (winOrLose == true) {
+  //     totalGold += bet;
+  //     System.out.println("Congrats! You have guessed right! \nYou have received " + bet*2 + " gold.");
+  //   } else if (winOrLose == false) {
+  //     totalGold -= bet;
+  //     System.out.println("Sorry, better luck next time! \nYou have lost " + bet + " gold.");
+  //   }
+  // }
+  public void addGold(boolean winOrLose, int bet, int winStreak) {
+    if (winOrLose == true) {
+      totalGold += bet*2*winStreak*1.5-bet;
+      System.out.println("You have received " + (bet*2*winStreak*1.5-bet) + " gold.");
+    } else if (winOrLose == false) {
       totalGold -= bet;
-      System.out.println("Sorry, better luck next time! \nYou have lost " + bet + " gold.");
+      System.out.println("You have lost " + bet + " gold.");
     }
   }
-  public void addGoldFromBJ(int bet) {
+  public void addGold(int bet) {
     totalGold += bet;
     System.out.println("You have received " + bet*2 + " gold.");
   }
-  public void removeGoldFromBJ(int bet) {
+  public void removeGold(int bet) {
     totalGold -= bet;
     System.out.println("Sorry, better luck next time! \nYou have lost " + bet + " gold.");
   }
