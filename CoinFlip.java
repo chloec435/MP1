@@ -1,35 +1,41 @@
-// import java.util.Scanner;
-// public class CoinFlip {
-//   private int headsOrTails;
-//   private int coin;
-//   private Fishing gfcf;
-//   public void flip(String HorT) {
-//     Scanner one = new Scanner(System.in);
-//     System.out.println("How much do you want to bet?");
-//     int wager = one.nextInt();
-//     gfcf = new Fishing();
-//     int max = 1;
-//     int min = 0;
-//     int range = max - min + 1;
-//     int bet = (int)(Math.random() * range) + min;
-//     coin = bet;
-//     if (HorT.equals("heads") || HorT.equals("h")) {
-//       headsOrTails = 0;
-//     } else if (HorT.equals("tails") || HorT.equals("t")) {
-//       headsOrTails = 1;
-//     }
-//     if (headsOrTails == bet) {
-//       System.out.println("Congrats! You have guessed right!");
-//       gfcf.addGoldFromCF(wager);
-//     } else {
-//       System.out.println("Sorry, better luck next time!");
-//       gfcf.addGoldFromCF(wager);
-//     }
-//   }
-//   public int headsOrTails() {
-//     return headsOrTails;
-//   }
-//   public int getCoin() {
-//     return coin;
-//   }
-// }
+import java.util.Scanner;
+public class Coinflip {
+  private int max = 1;
+  private int min = 0;
+  private int coinSide = (int)(Math.random() * (max - min + 1)) + min;
+  private int cfBet;
+  private static int winStreak;
+  public Coinflip() {}
+  public Coinflip(String one) {
+    headsOrTails();
+    winOrLose();
+  }
+  public Coinflip(int winStreak) {
+    headsOrTails();
+    winOrLose();
+    winStreak(winStreak);
+  }
+  public void headsOrTails() {
+    System.out.println("Heads or tails?");
+    Scanner scanner = new Scanner(System.in);
+    String hOrT = scanner.nextLine();
+    if (hOrT.equalsIgnoreCase("heads") || hOrT.equalsIgnoreCase("h")) cfBet = 0;
+    else if (hOrT.equalsIgnoreCase("tails") || hOrT.equalsIgnoreCase("t")) cfBet = 1;
+  }
+  public boolean winOrLose() {
+    if (cfBet == coinSide) return true;
+    else return false;
+  }
+  public void winStreak(int streak) {
+    if (winOrLose() == true) {
+      winStreak++;
+      System.out.println("You won! Your win streak is now " + winStreak);
+    } else {
+      winStreak = 0;
+      System.out.println("You lost! Your win streak is now " + winStreak);
+    }
+  }
+  public static int getWinStreak() {
+    return winStreak;
+  }
+}
