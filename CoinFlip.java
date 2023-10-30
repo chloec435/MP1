@@ -5,7 +5,6 @@ public class Coinflip {
   private int coinSide = (int)(Math.random() * (max - min + 1)) + min;
   private int cfBet;
   private static int winStreak;
-  public Coinflip() {}
   public Coinflip(String one) {
     headsOrTails();
     winOrLose();
