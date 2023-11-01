@@ -14,12 +14,25 @@ public class Coinflip {
     winOrLose();
     winStreak(winStreak);
   }
+  public String toString() {
+    String betOfSide = "";
+    String sideOfCoin = "";
+    if (cfBet == 0) betOfSide = "heads";
+    if (cfBet == 1) betOfSide = "tails";
+    if (coinSide == 0) sideOfCoin = "heads";
+    if (coinSide == 1) sideOfCoin = "tails";
+    return "You chose " + betOfSide + ". The coin landed on " + sideOfCoin + ". You have a win streak of " + winStreak + ".";
+  }
   public void headsOrTails() {
     System.out.println("Heads or tails?");
     Scanner scanner = new Scanner(System.in);
     String hOrT = scanner.nextLine();
     if (hOrT.equalsIgnoreCase("heads") || hOrT.equalsIgnoreCase("h")) cfBet = 0;
     else if (hOrT.equalsIgnoreCase("tails") || hOrT.equalsIgnoreCase("t")) cfBet = 1;
+    else {
+      System.out.println("Invalid response. Please try again.");
+      headsOrTails();
+    }
   }
   public boolean winOrLose() {
     if (cfBet == coinSide) return true;
