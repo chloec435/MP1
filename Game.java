@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 public class Game {
   private Fishing fishing;
@@ -6,6 +7,7 @@ public class Game {
   private int bjBet;
   private Scanner scanner;
   private String command;
+  private int sell;
   public Game() {
     fishing = new Fishing();
     scanner = new Scanner(System.in);
@@ -37,15 +39,16 @@ public class Game {
       fishing.catchFish((int)(Math.random() * range) + min);
     } else if (command.equalsIgnoreCase("sell") || command.equalsIgnoreCase("s")) {
       System.out.println("How much fish do you want to sell?");
-      try {
-        Scanner c = new Scanner(System.in);
-        int sell = c.nextInt();
-        fishing.sellFish(sell);
-      } catch (Exception inputMismatchException) {
-        System.out.println("Please enter an integer.");
-        Scanner d = new Scanner(System.in);
-        int newSell = d.nextInt();
-        fishing.sellFish(newSell);
+      boolean success = false;
+      while (!success) {
+        try {
+          Scanner c = new Scanner(System.in);
+          sell = c.nextInt();
+          fishing.sellFish(sell);
+          success = true;
+        } catch (Exception inputMismatchException) {
+          System.out.println("Please enter an integer.");
+        }
       }
     } else if (command.equalsIgnoreCase("fish") || command.equalsIgnoreCase("f")) {
       System.out.println("You have a total of " + fishing.numFish() + " fish.");
@@ -65,31 +68,61 @@ public class Game {
   }
 
   public void coinFlip() {
-    Scanner e = new Scanner(System.in);
-    int gold = e.nextInt();
-    if (fishing.getGold() < gold) {
-      System.out.println("You do not have enough gold. Type \"catch\" to catch some fish or \"sell\" to sell fish for gold!");
-    } else {
-      if (Coinflip.getWinStreak() == 0) {
-        coinflip = new Coinflip("start");
-        fishing.addGold(coinflip.winOrLose(), gold);
-        coinflip.winStreak(1);
-      } else {
-        coinflip = new Coinflip(coinflip.getWinStreak()+1);
-        fishing.addGold(coinflip.winOrLose(), gold, coinflip.getWinStreak());
+    boolean success = false;
+    while (!success) {
+      try {
+        Scanner e = new Scanner(System.in);
+        int gold = e.nextInt();
+        if (fishing.getGold() < gold) {
+          System.out.println("You do not have enough gold. Type \"catch\" to catch some fish or \"sell\" to sell fish for gold!");
+        } else {
+          if (Coinflip.getWinStreak() == 0) {
+            coinflip = new Coinflip("start");
+            fishing.addGold(coinflip.winOrLose(), gold);
+            coinflip.winStreak(1);
+            askStats(coinflip.toString());
+          } else {
+            coinflip = new Coinflip(Coinflip.getWinStreak()+1);
+            fishing.addGold(coinflip.winOrLose(), gold, Coinflip.getWinStreak());
+            askStats(coinflip.toString());
+          }
+        }
+        success = true;
+      } catch (Exception inputMismatchException) {
+        System.out.println("Please enter an integer.");
       }
     }
   }
 
   public void blackJack() {
-    Scanner g = new Scanner(System.in);
-    bjBet = g.nextInt();
-    if (fishing.getGold() < bjBet) {
-      System.out.println("You do not have enough gold. Type \"catch\" to catch some fish or \"sell\" to sell fish for gold!");
-    } else {
-    blackjack = new Blackjack();
-    if (blackjack.getPlayerWin()) fishing.addGold(bjBet);
-    else if (!blackjack.getPlayerWin() && !(blackjack.getPlayerTotal() == blackjack.getDealerTotal())) fishing.removeGold(bjBet);
+    boolean success = false;
+    while (!success) {
+      try {
+        Scanner g = new Scanner(System.in);
+        bjBet = g.nextInt();
+        if (fishing.getGold() < bjBet) {
+          System.out.println("You do not have enough gold. Type \"catch\" to catch some fish or \"sell\" to sell fish for gold!");
+        } else {
+        blackjack = new Blackjack();
+        if (blackjack.getPlayerWin()) fishing.addGold(bjBet);
+        else if (!blackjack.getPlayerWin() && !(blackjack.getPlayerTotal() == blackjack.getDealerTotal())) fishing.removeGold(bjBet);
+        }
+        askStats(blackjack.toString());
+        success = true;
+      } catch (Exception inputMismatchException) {
+        System.out.println("Please enter an integer.");
+      }
+    }
+  }
+
+  public void askStats(String game) {
+    System.out.println("Would you like to see the summary of the game (yes/no)?");
+    Scanner h = new Scanner(System.in);
+    String summary = h.nextLine();
+    if (summary.equalsIgnoreCase("yes") || summary.equalsIgnoreCase("y")) {
+      System.out.println(game);
+    } else if (summary.equalsIgnoreCase("no") || summary.equalsIgnoreCase("n")){
+      System.out.println("Okay.");
     }
   }
 }
