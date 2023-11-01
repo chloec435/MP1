@@ -10,6 +10,9 @@ public class Blackjack {
     ask();
     compareTotal();
   }
+  public String toString() {
+    return "Player total: " + playerTotal + " | Dealer total: " + dealerTotal + " | Player win:" + playerWin;
+  }
   public void deal() {
     Random random = new Random();
     int playerCard1 = random.nextInt(10) + 1;
@@ -29,6 +32,9 @@ public class Blackjack {
       System.out.println("The dealer's total is " + dealerTotal + ".");
       if (dealerTotal < 17) dealerHit(); 
       else System.out.println("The dealer has chosen to stay.");
+    } else {
+      System.out.println("Invalid response. Please try again.");
+      ask();
     }
   }
   public void playerHit() {
