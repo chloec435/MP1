@@ -14,7 +14,7 @@ public class Game {
     playerInfo();
     command = "start";
     while(!command.equals("end")) {
-      System.out.println("Type a command:");
+      System.out.println("\n\nType a command, or type \"command\" to view the commands:");
       scanner = new Scanner(System.in);
       command = scanner.nextLine();
       commands(command);
@@ -25,10 +25,10 @@ public class Game {
   }
   
   public void playerInfo() {
-    System.out.println("Enter a user name:");
+    System.out.println("Welcome! Please enter your name:");
     Scanner b = new Scanner(System.in);
     String playerName = b.nextLine();
-    System.out.println("Hello " + playerName + ". \nType \"catch\" or \"c\" to catch some fish. \nType \"sell\" or \"s\" to sell fish. \nType \"fish\" or \"f\" to check how much fish you have. \nType \"gold\" or \"g\" to view your balance. \nType \"coinflip\" or \"cf\" to bet gold on heads or tails. \nType \"blackjack\" or \"bj\" to play a round of blackjack. \nType \"command\" to view the commands. \nType \"end\" to end this game.");
+    System.out.println("\nHello " + playerName + ". \n\nType \"catch\" or \"c\" to catch some fish. \nType \"sell\" or \"s\" to sell fish. \nType \"fish\" or \"f\" to check how much fish you have. \nType \"gold\" or \"g\" to view your balance. \nType \"coinflip\" or \"cf\" to bet gold on heads or tails. \nType \"blackjack\" or \"bj\" to play a round of blackjack. \nType \"command\" to view the commands. \nType \"end\" to end this game.");
   }
   
   public void commands(String command) {
@@ -47,7 +47,7 @@ public class Game {
           fishing.sellFish(sell);
           success = true;
         } catch (Exception inputMismatchException) {
-          System.out.println("Please enter an integer.");
+          System.out.println("\nPlease enter an integer.");
         }
       }
     } else if (command.equalsIgnoreCase("fish") || command.equalsIgnoreCase("f")) {
@@ -63,7 +63,7 @@ public class Game {
     } else if (command.equalsIgnoreCase("command") || command.equalsIgnoreCase("commands")) {
         System.out.println("Type \"catch\" or \"c\" to catch some fish. \nType \"sell\" or \"s\" to sell fish. \nType \"fish\" or \"f\" to check how much fish you have. \nType \"gold\" or \"g\" to view your balance. \nType \"coinflip\" or \"cf\" to bet gold on heads or tails. \nType \"blackjack\" or \"bj\" to play a round of blackjack. \nType \"command\" to view the commands. \nType \"end\" to end this game.");
     } else {
-      System.out.println("Please try again.");
+      System.out.println("\nPlease try again.");
     }
   }
 
@@ -89,7 +89,7 @@ public class Game {
         }
         success = true;
       } catch (Exception inputMismatchException) {
-        System.out.println("Please enter an integer.");
+        System.out.println("\nPlease enter an integer.");
       }
     }
   }
@@ -110,13 +110,13 @@ public class Game {
         askStats(blackjack.toString());
         success = true;
       } catch (Exception inputMismatchException) {
-        System.out.println("Please enter an integer.");
+        System.out.println("\nPlease enter an integer.");
       }
     }
   }
 
   public void askStats(String game) {
-    System.out.println("Would you like to see the summary of the game (yes/no)?");
+    System.out.println("\nWould you like to see the summary of the game (yes/no)?");
     Scanner h = new Scanner(System.in);
     String summary = h.nextLine();
     if (summary.equalsIgnoreCase("yes") || summary.equalsIgnoreCase("y")) {
