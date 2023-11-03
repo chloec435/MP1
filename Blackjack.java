@@ -11,7 +11,7 @@ public class Blackjack {
     compareTotal();
   }
   public String toString() {
-    return "Player total: " + playerTotal + " | Dealer total: " + dealerTotal + " | Player win:" + playerWin;
+    return "Player total: " + playerTotal + " | Dealer total: " + dealerTotal + " | Player win: " + playerWin;
   }
   public void deal() {
     Random random = new Random();
@@ -23,13 +23,13 @@ public class Blackjack {
     dealerTotal = dealerCard1 + dealerCard2;
   }
   public void ask() {
-    System.out.println("Your total is " + playerTotal + ". Would you like to hit (yes/no)?");
+    System.out.println("\nYour total is " + playerTotal + ". Would you like to hit (yes/no)?");
     Scanner scanner = new Scanner(System.in);
     response = scanner.nextLine();
     if (response.equalsIgnoreCase("yes") || response.equalsIgnoreCase("y")) {
       playerHit();
     } else if (response.equalsIgnoreCase("no") || response.equalsIgnoreCase("n")) {
-      System.out.println("The dealer's total is " + dealerTotal + ".");
+      System.out.println("\nThe dealer's total is " + dealerTotal + ".");
       if (dealerTotal < 17) dealerHit(); 
       else System.out.println("The dealer has chosen to stay.");
     } else {
@@ -43,10 +43,10 @@ public class Blackjack {
     playerTotal += playerCard3;
     System.out.println("Your new card is " + playerCard3 + ". Your total is now " + playerTotal + ".");
     if (playerTotal > 21) {
-      System.out.println("You busted! Dealer wins.");
+      System.out.println("\nYou busted! Dealer wins.");
       playerWin = false;
     } else if (playerTotal == 21) {
-      System.out.println("You got a Blackjack! Dealer's turn.");
+      System.out.println("\nYou got a Blackjack! Dealer's turn.");
       dealerHit();
     } else if (playerTotal < 21) {
       ask();
@@ -58,10 +58,10 @@ public class Blackjack {
     dealerTotal += dealerCard3;
     System.out.println("The dealer's new card is " + dealerCard3 + ". Their total is now " + dealerTotal + ".");
     if (dealerTotal > 21) {
-      System.out.println("The dealer busted! You win!");
+      System.out.println("\nThe dealer busted! You win!");
       playerWin = true;
     } else if (dealerTotal == 21) {
-      System.out.println("The dealer got Blackjack!");
+      System.out.println("\nThe dealer got Blackjack!");
       playerWin = false;
     } else if (dealerTotal < 17) {
       dealerHit();
@@ -69,13 +69,13 @@ public class Blackjack {
   }
   public void compareTotal() {
     if (playerTotal > dealerTotal && playerTotal <= 21) {
-      System.out.println("You win!");
+      System.out.println("\nYou win!");
       playerWin = true;
     } else if (playerTotal < dealerTotal && dealerTotal <= 21) {
-      System.out.println("Dealer wins!");
+      System.out.println("\nDealer wins!");
       playerWin = false;
     } else if (playerTotal == dealerTotal && (dealerTotal <= 21 && playerTotal <= 21)) {
-      System.out.println("It's a draw!");
+      System.out.println("\nIt's a draw!");
     }
   }
   public int getPlayerTotal() {
