@@ -16,12 +16,12 @@ public class Fishing {
       Integer addGold = new Integer(fish*100);
       if (totalGold <= Integer.MAX_VALUE) {
         totalGold += addGold.intValue();
-        System.out.println("You have sold " + fish + " fish and received " + addGold.intValue() + " gold.");
+        System.out.println("\nYou have sold " + fish + " fish and received " + addGold.intValue() + " gold.");
       } else {
-        System.out.println("No more gold can be added to your balance. You have reached the maximum gold limit of " + Integer.MAX_VALUE + ".");
+        System.out.println("\nNo more gold can be added to your balance. You have reached the maximum gold limit of " + Integer.MAX_VALUE + ".");
       }
     } else {
-      System.out.println("You don't have enough fish to sell. You currently have a total of " + totalFish + " fish.");
+      System.out.println("\nYou don't have enough fish to sell. You currently have a total of " + totalFish + " fish.");
     }
   }
   
@@ -31,7 +31,7 @@ public class Fishing {
         totalGold += bet;
         System.out.println("Congrats! You have guessed right! \nYou have received " + bet*2 + " gold.");
       } else {
-        System.out.println("No more gold can be added to your balance. You have reached the maximum gold limit of " + Integer.MAX_VALUE + ".");
+        System.out.println("\nNo more gold can be added to your balance. You have reached the maximum gold limit of " + Integer.MAX_VALUE + ".");
       }
     } else if (winOrLose == false) {
       totalGold -= bet;
@@ -45,7 +45,7 @@ public class Fishing {
         totalGold += bet*winStreak*1.5;
         System.out.println("You have received " + (bet*winStreak*1.5) + " gold.");
       } else {
-        System.out.println("No more gold can be added to your balance. You have reached the maximum gold limit of " + Integer.MAX_VALUE + ".");
+        System.out.println("\nNo more gold can be added to your balance. You have reached the maximum gold limit of " + Integer.MAX_VALUE + ".");
       }
     } else if (winOrLose == false) {
       totalGold -= bet;
@@ -58,7 +58,7 @@ public class Fishing {
       totalGold += bet;
       System.out.println("You have received " + bet*2 + " gold.");
     } else {
-      System.out.println("No more gold can be added to your balance. You have reached the maximum gold limit of " + Integer.MAX_VALUE + ".");
+      System.out.println("\nNo more gold can be added to your balance. You have reached the maximum gold limit of " + Integer.MAX_VALUE + ".");
     }
   }
   
